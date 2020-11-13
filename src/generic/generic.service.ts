@@ -34,7 +34,7 @@ export class GenericService<T> implements GenericInterface<T> {
     if (responseAux == null) throw new NotFoundException("Not exist");
 
     entity["id"] = Number(id);
-    let mergeEntity: any = Object.assign(responseAux, entity);
+    const mergeEntity: any = Object.assign(responseAux, entity);
     const response: T = await this.genericRepository.save(mergeEntity);
   }
 

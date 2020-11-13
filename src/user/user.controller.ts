@@ -45,7 +45,7 @@ export class UserController {
 
       const user = await this.userService.findByUsername(entity.username);
       const auth = ((user != null && await bcrypt.compare(entity.password, user.password))
-        ? res.send(user.password) : res.sendStatus(403));
+        ? res.send({ token: user.password,username:user.username }) : res.sendStatus(403));
 
     } catch {
       res.sendStatus(HttpStatus.BAD_GATEWAY);

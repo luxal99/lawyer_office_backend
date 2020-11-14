@@ -7,6 +7,6 @@ import { ClientRepository } from '../repository/client.repository';
 export class ClientService extends GenericService<Client> {
 
   constructor(private readonly repository: ClientRepository) {
-    super(repository, []);
+    super(repository, ['listOfCases']);
   }
 }

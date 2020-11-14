@@ -1,5 +1,5 @@
 import { GenericService } from './generic.service';
-import { Body, Get, HttpStatus, Param, Post, Req, Res } from '@nestjs/common';
+import { Body, Get, HttpStatus, Param, Post, Put, Req, Res } from '@nestjs/common';
 import { Response, Request } from 'express';
 
 export class GenericController<T> {
@@ -11,6 +11,17 @@ export class GenericController<T> {
   async post(@Body() entity: T, @Res() res: Response) {
     const entityResponse = await this.genericService.save(entity);
     res.send(entityResponse)
+  }
+
+  @Put()
+  async put(@Req() req:Request,@Res() res:Response) {
+    try{
+      await this.genericService.update(req.body.id,req.body).then(()=>{
+        res.sendStatus(HttpStatus.OK)
+      })
+    }catch (e){
+      res.sendStatus(HttpStatus.BAD_GATEWAY)
+    }
   }
 
   @Get()

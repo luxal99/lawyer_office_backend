@@ -6,6 +6,10 @@ import { Lawsuit } from '../lawsuit/lawsuit.entity';
 @Entity()
 export class Case extends Base {
 
+
+  @Column({ nullable: false })
+  title: string;
+
   @Column({ nullable: false })
   creation_date: Date;
 

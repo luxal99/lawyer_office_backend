@@ -6,9 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
 import { UserInfoModule } from './user-info/user-info.module';
 import { UserInfo } from './user-info/user-info.entity';
+import { ClientModule } from './client/client.module';
 
 @Module({
-  imports: [UserModule,UserInfoModule,TypeOrmModule.forRoot({
+  imports: [UserModule,ClientModule,UserInfoModule,TypeOrmModule.forRoot({
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
@@ -32,7 +33,7 @@ import { UserInfo } from './user-info/user-info.entity';
       "migrationsDir": "src/migration",
       "subscribersDir": "src/subscriber"
     }
-  }), UserInfoModule],
+  }), UserInfoModule, ClientModule],
   controllers: [AppController],
   providers: [AppService],
 })

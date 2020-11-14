@@ -1,6 +1,7 @@
 import { Base } from '../generic/base.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Client } from '../client/client.entity';
+import { Lawsuit } from '../lawsuit/lawsuit.entity';
 
 @Entity()
 export class Case extends Base {
@@ -8,7 +9,7 @@ export class Case extends Base {
   @Column({ nullable: false })
   creation_date: Date;
 
-  @Column({ length: 10240 })
+  @Column({ length: 10240, nullable: true })
   note: string;
 
   @Column({ default: true })
@@ -17,4 +18,13 @@ export class Case extends Base {
   @ManyToOne(type => Client, id => id.listOfCases)
   id_client: Client;
 
+  @OneToMany(type => Lawsuit, listOfLawsuits => listOfLawsuits.id_case)
+  listOfLawsuits: Lawsuit[];
+
+  constructor(creation_date: Date, note: string, id_client: Client) {
+    super();
+    this.creation_date = creation_date;
+    this.note = note;
+    this.id_client = id_client;
+  }
 }

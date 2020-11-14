@@ -9,6 +9,7 @@ import { UserInfo } from './user-info/user-info.entity';
 import { ClientModule } from './client/client.module';
 import { CaseModule } from './case/case.module';
 import { Client } from './client/client.entity';
+import { Case } from './case/case.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -23,7 +24,8 @@ import { Client } from './client/client.entity';
     'entities': [
       User,
       UserInfo,
-      Client
+      Client,
+      Case
     ],
     'migrations': [
       'src/migration/**/*.ts',

@@ -1,6 +1,9 @@
 import { Base } from '../generic/base.entity';
-import { Column } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { Case } from '../case/case.entity';
 
+
+@Entity()
 export class Client extends Base {
 
   @Column({ nullable: false })
@@ -12,6 +15,8 @@ export class Client extends Base {
   @Column({ nullable: false })
   telephone: string;
 
+  @OneToMany(type => Case, listOfCases => listOfCases.id_client)
+  listOfCases: Case[];
 
   constructor(full_name?: string, email?: string, telephone?: string) {
     super();

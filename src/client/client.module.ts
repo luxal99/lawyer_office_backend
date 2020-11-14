@@ -3,10 +3,9 @@ import { ClientController } from './client.controller';
 import { ClientService } from './client.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientRepository } from '../repository/client.repository';
-import { CaseModule } from '../case/case.module';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([ClientRepository]), CaseModule],
+  imports:[TypeOrmModule.forFeature([ClientRepository])],
   controllers: [ClientController],
   providers: [ClientService]
 })

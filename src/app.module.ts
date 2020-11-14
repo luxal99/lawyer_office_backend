@@ -10,6 +10,8 @@ import { ClientModule } from './client/client.module';
 import { CaseModule } from './case/case.module';
 import { Client } from './client/client.entity';
 import { Case } from './case/case.entity';
+import { LawsuitModule } from './lawsuit/lawsuit.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -38,7 +40,7 @@ import { Case } from './case/case.entity';
       'migrationsDir': 'src/migration',
       'subscribersDir': 'src/subscriber',
     },
-  }),UserModule, ClientModule, CaseModule, UserInfoModule],
+  }),UserModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule],
   controllers: [AppController],
   providers: [AppService],
 })

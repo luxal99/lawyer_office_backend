@@ -22,7 +22,7 @@ export class Case extends Base {
   @ManyToOne(type => Client, id_client => id_client.listOfCases)
   id_client: Client;
 
-  @OneToMany(type => Lawsuit, listOfLawsuits => listOfLawsuits.id_case)
+  @OneToMany(type => Lawsuit, listOfLawsuits => listOfLawsuits.id_case,{cascade:true})
   listOfLawsuits: Lawsuit[];
 
   constructor(creation_date: Date, note: string, id_client: Client) {
@@ -30,5 +30,7 @@ export class Case extends Base {
     this.creation_date = creation_date;
     this.note = note;
     this.id_client = id_client;
+
+
   }
 }

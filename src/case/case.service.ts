@@ -8,7 +8,7 @@ export class CaseService extends GenericService<Case>{
 
 
   constructor(private readonly repository: CaseRepository) {
-    super(repository,['id_client','listOfLawsuits']);
+    super(repository,['id_client','listOfLawsuits','id_client.listOfCases']);
   }
 }
 

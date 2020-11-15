@@ -11,7 +11,7 @@ export class Lawsuit extends Base {
   @Column({ length: 10240 })
   note: string;
 
-  @ManyToOne(type => Case,id=>id.listOfLawsuits)
+  @ManyToOne(type => Case,id_case=>id_case.listOfLawsuits)
   id_case:Case
 
 

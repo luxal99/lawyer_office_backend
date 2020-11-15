@@ -19,7 +19,7 @@ export class Case extends Base {
   @Column({ default: true })
   status: boolean;
 
-  @ManyToOne(type => Client, id => id.listOfCases)
+  @ManyToOne(type => Client, id_client => id_client.listOfCases)
   id_client: Client;
 
   @OneToMany(type => Lawsuit, listOfLawsuits => listOfLawsuits.id_case)

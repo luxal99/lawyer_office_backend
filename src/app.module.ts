@@ -13,6 +13,7 @@ import { Case } from './case/case.entity';
 import { LawsuitModule } from './lawsuit/lawsuit.module';
 import { NotificationModule } from './notification/notification.module';
 import { Lawsuit } from './lawsuit/lawsuit.entity';
+import { Notification } from './notification/notification.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -29,6 +30,7 @@ import { Lawsuit } from './lawsuit/lawsuit.entity';
       UserInfo,
       Client,
       Case,
+      Notification,
       Lawsuit,
     ],
     'migrations': [

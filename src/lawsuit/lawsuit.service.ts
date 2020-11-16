@@ -7,18 +7,15 @@ import { LawsuitRepository } from '../repository/lawsuit.repository';
 export class LawsuitService extends GenericService<Lawsuit> {
 
   constructor(private readonly repository: LawsuitRepository) {
-    super(repository, ['id_case','id_case.listOfLawsuits','id_case.id_client']);
+    super(repository, ['id_case', 'id_case.listOfLawsuits', 'id_case.id_client']);
   }
 
   async getNextThreeLawsuit(): Promise<Lawsuit[]> {
-    const listOfLawsuits: Lawsuit[] = await this.findAll();
 
-    listOfLawsuits.sort((a, b) => {
-      const c: any = new Date(a.date);
-      const d: any = new Date(b.date);
-      return d-c;
-    });
-
-    return listOfLawsuits.splice(0,3);
+    return (await this.findAll()).filter(x => x.date > new Date()).sort((a, b) => {
+      const c: any = new Date(a.date),
+        d: any = new Date(b.date);
+      return c - d;
+    }).splice(0, 3);
   }
 }

@@ -13,10 +13,11 @@ export class CaseService extends GenericService<Case> {
 
   async getLastThreeCases(): Promise<Case[]> {
     const listOfCases: Case[] = await this.findAll();
-
-
     return listOfCases.reverse().splice(0, 3);
+  }
 
+  async getAnalytics() {
+    return await this.repository.query('select status,COUNT(id) as value from `case` group by status\n');
   }
 }
 

@@ -18,4 +18,13 @@ export class CaseController extends GenericController<Case> {
       res.sendStatus(HttpStatus.BAD_GATEWAY);
     }
   }
+
+  @Get('/analytics')
+  async getCaseAnalytics(@Res() res:Response) {
+    try{
+      res.send(await this.service.getAnalytics())
+    }catch (e){
+      res.sendStatus(HttpStatus.BAD_GATEWAY)
+    }
+  }
 }

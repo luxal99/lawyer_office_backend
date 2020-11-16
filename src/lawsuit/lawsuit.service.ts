@@ -7,7 +7,7 @@ import { LawsuitRepository } from '../repository/lawsuit.repository';
 export class LawsuitService extends GenericService<Lawsuit> {
 
   constructor(private readonly repository: LawsuitRepository) {
-    super(repository, ['id_case']);
+    super(repository, ['id_case','id_case.listOfLawsuits','id_case.id_client']);
   }
 
   async getNextThreeLawsuit(): Promise<Lawsuit[]> {
@@ -19,6 +19,6 @@ export class LawsuitService extends GenericService<Lawsuit> {
       return d-c;
     });
 
-    return listOfLawsuits;
+    return listOfLawsuits.splice(0,3);
   }
 }

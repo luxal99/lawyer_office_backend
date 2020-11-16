@@ -13,6 +13,9 @@ export class Case extends Base {
   @Column({ nullable: false })
   creation_date: Date;
 
+  @Column({default:'01/01/2020'})
+  creation_date_formatted: string;
+
   @Column({ length: 10240, nullable: true })
   note: string;
 

@@ -10,6 +10,6 @@ async function bootstrap() {
 }
 
 bootstrap().then(async () => {
-  await axios.get('http://localhost:8080/notification/generate');
+  //await axios.get('http://localhost:8080/notification/generate');
 });
 

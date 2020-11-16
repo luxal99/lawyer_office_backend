@@ -1,5 +1,5 @@
 import { GenericService } from './generic.service';
-import { Body, Get, HttpStatus, Param, Post, Put, Req, Res } from '@nestjs/common';
+import { Body, Delete, Get, HttpStatus, Param, Post, Put, Req, Res } from '@nestjs/common';
 import { Response, Request } from 'express';
 
 export class GenericController<T> {
@@ -34,6 +34,17 @@ export class GenericController<T> {
     try {
       res.send(await this.genericService.findOne(id));
     } catch (error) {
+      res.sendStatus(HttpStatus.BAD_GATEWAY);
+    }
+  }
+
+  @Delete('/:id')
+  async delete(@Param('id')id: number, @Res() res: Response) {
+    try {
+      await this.genericService.delete(id).then(() => {
+        res.sendStatus(HttpStatus.OK);
+      });
+    } catch (e) {
       res.sendStatus(HttpStatus.BAD_GATEWAY);
     }
   }

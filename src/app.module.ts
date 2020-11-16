@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -14,9 +13,13 @@ import { LawsuitModule } from './lawsuit/lawsuit.module';
 import { NotificationModule } from './notification/notification.module';
 import { Lawsuit } from './lawsuit/lawsuit.entity';
 import { Notification } from './notification/notification.entity';
+import { NotificationService } from './notification/notification.service';
+import { NotificationRepository } from './repository/notification.repository';
+import { LawsuitRepository } from './repository/lawsuit.repository';
+import { LawsuitService } from './lawsuit/lawsuit.service';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [TypeOrmModule.forFeature([NotificationRepository,LawsuitRepository]),TypeOrmModule.forRoot({
     'type': 'mysql',
     'host': 'localhost',
     'port': 3306,
@@ -44,9 +47,8 @@ import { Notification } from './notification/notification.entity';
       'migrationsDir': 'src/migration',
       'subscribersDir': 'src/subscriber',
     },
-  }), UserModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule],
-  controllers: [AppController],
-  providers: [AppService],
+  }), UserModule,ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule],
+  providers: [AppService, NotificationService,LawsuitService],
 })
 export class AppModule {
 }

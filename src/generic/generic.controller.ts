@@ -10,17 +10,17 @@ export class GenericController<T> {
   @Post()
   async post(@Body() entity: T, @Res() res: Response) {
     const entityResponse = await this.genericService.save(entity);
-    res.send(entityResponse)
+    res.send(entityResponse);
   }
 
   @Put()
-  async put(@Req() req:Request,@Res() res:Response) {
-    try{
-      await this.genericService.update(req.body.id,req.body).then(()=>{
-        res.sendStatus(HttpStatus.OK)
-      })
-    }catch (e){
-      res.sendStatus(HttpStatus.BAD_GATEWAY)
+  async put(@Req() req: Request, @Res() res: Response) {
+    try {
+      await this.genericService.update(req.body.id, req.body).then(() => {
+        res.sendStatus(HttpStatus.OK);
+      });
+    } catch (e) {
+      res.sendStatus(HttpStatus.BAD_GATEWAY);
     }
   }
 

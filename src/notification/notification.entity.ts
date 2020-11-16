@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { Base } from '../generic/base.entity';
 import { Lawsuit } from '../lawsuit/lawsuit.entity';
 
@@ -8,9 +8,14 @@ export class Notification extends Base {
   @Column({ length: 10240 })
   note: string;
 
-  @OneToOne(() => Lawsuit)
+  @ManyToOne(type => Lawsuit , id_lawsuit=>id_lawsuit.listOfNotification )
   @JoinColumn()
   id_lawsuit: Lawsuit;
 
 
+  constructor(id_lawsuit?: Lawsuit, note?: string) {
+    super();
+    this.note = note;
+    this.id_lawsuit = id_lawsuit;
+  }
 }

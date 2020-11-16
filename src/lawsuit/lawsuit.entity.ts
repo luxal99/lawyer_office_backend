@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Base } from '../generic/base.entity';
 import { Case } from '../case/case.entity';
+import { Notification } from '../notification/notification.entity';
 
 @Entity()
 export class Lawsuit extends Base {
@@ -17,6 +18,8 @@ export class Lawsuit extends Base {
   @ManyToOne(type => Case,id_case=>id_case.listOfLawsuits)
   id_case:Case
 
+  @OneToMany(type => Notification, listOfNotification=>listOfNotification.id_lawsuit)
+  listOfNotification:Notification[]
 
   constructor(date?: Date, note?: string) {
     super();

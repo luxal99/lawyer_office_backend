@@ -18,6 +18,9 @@ export class UserController {
 
   @Post()
   async register(@Req() req: Request, @Res() resp: Response) {
+
+    console.log(req.body);
+
     try {
 
       let userInfo = new UserInfo();
@@ -30,12 +33,12 @@ export class UserController {
 
       userInfo = response['data'];
 
-      await this.userService.save(new User(req.body.username, await bcrypt.hash(req.body.password, 10), userInfo)).then(() => {
+      await this.userService.save(new User(req.body.user.username, await bcrypt.hash(req.body.user.password, 10), userInfo)).then(() => {
         resp.sendStatus(HttpStatus.OK);
       });
 
     } catch (e) {
-      resp.sendStatus(HttpStatus.BAD_GATEWAY);
+      resp.sendStatus(e);
     }
   }
 

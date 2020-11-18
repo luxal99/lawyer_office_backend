@@ -32,7 +32,7 @@ export class NotificationService extends GenericService<Notification> {
   }
 
   async scheduledNotification() {
-    new CronJob('* * * * *', () => {
+    new CronJob('* * * * * *', () => {
       this.generateNotification();
     }, null, true, 'Europe/Belgrade').start();
   }

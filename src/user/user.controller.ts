@@ -33,7 +33,7 @@ export class UserController {
 
       userInfo = response['data'];
 
-      await this.userService.save(new User(req.body.user.username, await bcrypt.hash(req.body.user.password, 10), userInfo)).then(() => {
+      await this.userService.save(new User(req.body.username, await bcrypt.hash(req.body.password, 10), userInfo)).then(() => {
         resp.sendStatus(HttpStatus.OK);
       });
 

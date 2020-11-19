@@ -18,9 +18,6 @@ export class UserController {
 
   @Post()
   async register(@Req() req: Request, @Res() resp: Response) {
-
-    console.log(req.body);
-
     try {
 
       let userInfo = new UserInfo();

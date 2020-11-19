@@ -52,8 +52,8 @@ export class NotificationService extends GenericService<Notification> {
         port: 587,
         secure: false, // upgrade later with STARTTLS
         auth: {
-          user: 'lukicaleksa04@gmail.com',
-          pass: '*145#7890=',
+          user: 'advokatskakancelarijazajecar@gmail.com',
+          pass: 'Luxal.99',
         },
       });
 
@@ -66,7 +66,7 @@ export class NotificationService extends GenericService<Notification> {
     });
 
     const mailOptions = {
-      from: 'lukicaleksa04@gmail.com',
+      from: 'advokatskakancelarijazajecar@gmail.com',
       to: await this.findMails(),
       subject: 'Obaveštenje o skorašnjem ročištu',
       text: mailText,
@@ -81,7 +81,7 @@ export class NotificationService extends GenericService<Notification> {
   }
 
   async scheduledNotification() {
-    new CronJob('* 7 * * *', async () => {
+    new CronJob('* * * * * *', async () => {
       await this.generateNotification();
     }, null, true, 'Europe/Belgrade').start();
   }

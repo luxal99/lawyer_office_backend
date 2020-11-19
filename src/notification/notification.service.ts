@@ -52,8 +52,8 @@ export class NotificationService extends GenericService<Notification> {
         port: 587,
         secure: false, // upgrade later with STARTTLS
         auth: {
-          user: 'advokatskakancelarijazajecar@gmail.com',
-          pass: 'Luxal.99',
+          user: 'lukicaleksa04@gmail.com',
+          pass: '*145#7890=',
         },
       });
 

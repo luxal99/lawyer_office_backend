@@ -22,7 +22,7 @@ export class Case extends Base {
   @Column({ default: true })
   status: boolean;
 
-  @ManyToOne(type => Client, id_client => id_client.listOfCases,{ cascade: true, onDelete: "CASCADE" })
+  @ManyToOne(type => Client, id_client => id_client.listOfCases,{  onDelete: "CASCADE" })
   @JoinColumn()
   id_client: Client;
 

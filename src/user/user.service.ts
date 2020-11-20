@@ -1,4 +1,3 @@
-
 import { User } from './user.entity';
 import { Inject, Injectable } from '@nestjs/common';
 import { EntityManager } from 'typeorm';
@@ -9,11 +8,9 @@ export class UserService {
   @Inject()
   private manager: EntityManager;
 
-  async save(entity: User) {
+  async save(entity: User): Promise<User> {
     try {
-      await this.manager.save(entity).then(()=>{
-        return entity
-      })
+      return await this.manager.save(entity);
     } catch (e) {
       throw new Error('');
     }

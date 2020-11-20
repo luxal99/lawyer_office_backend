@@ -31,7 +31,7 @@ export class UserController {
 
       userInfo = response['data'];
 
-      resp.send(await new User(req.body.username, await bcrypt.hash(req.body.password, 10), userInfo));
+      resp.send(await this.userService.save(new User(req.body.username, await bcrypt.hash(req.body.password, 10), userInfo)));
 
     } catch (e) {
       resp.sendStatus(HttpStatus.BAD_GATEWAY);

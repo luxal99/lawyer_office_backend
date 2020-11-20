@@ -6,7 +6,7 @@ import { Case } from '../case/case.entity'
 import { CaseService } from '../case/case.service';
 
 @Controller('client')
-export class ClientController extends GenericController<Client,Case>{
+export class ClientController extends GenericController<Client>{
 
   constructor(private readonly service:ClientService) {
     super(service);

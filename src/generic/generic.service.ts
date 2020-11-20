@@ -3,10 +3,10 @@ import { GenericInterface } from './generic.interface';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class GenericService<T, G> implements GenericInterface<T> {
+export class GenericService<T> implements GenericInterface<T> {
 
   constructor(
-    private readonly genericRepository: Repository<T>, private secondGenericRepository: Repository<G>, private relations: Array<string>) {
+    private readonly genericRepository: Repository<T>, private relations: Array<string>) {
   }
 
   async delete(id: number) {
@@ -38,15 +38,6 @@ export class GenericService<T, G> implements GenericInterface<T> {
     const response: T = await this.genericRepository.save(mergeEntity);
   }
 
-
-  async softDelete(id: number, relations: Array<string>) {
-    const ids = Array.from(await this.secondGenericRepository.find({ relations: relations }), secondEntity => secondEntity)
-      .filter(x => x['id_case' || 'id_lawsuit' || 'id_client'].id == id);
-
-    console.log(Array.from(ids, secondEntity => secondEntity['id']));
-      await this.secondGenericRepository.delete(Array.from(ids, secondEntity => secondEntity['id']));
-      await this.delete(id);
-  }
 
   async deleteAll(ids: number[]) {
     await this.genericRepository.delete(ids);

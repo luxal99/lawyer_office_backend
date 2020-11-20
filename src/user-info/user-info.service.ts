@@ -6,10 +6,10 @@ import { User } from '../user/user.entity';
 import { UserRepository } from '../repository/user.repository';
 
 @Injectable()
-export class UserInfoService extends GenericService<UserInfo, User> {
+export class UserInfoService extends GenericService<UserInfo> {
 
 
   constructor(private readonly repository: UserInfoRepository, private readonly userRepository: UserRepository) {
-    super(repository, userRepository, []);
+    super(repository, []);
   }
 }

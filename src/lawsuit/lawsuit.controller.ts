@@ -7,7 +7,7 @@ import { Notification } from '../notification/notification.entity';
 import { NotificationService } from '../notification/notification.service';
 
 @Controller('lawsuit')
-export class LawsuitController extends GenericController<Lawsuit, Notification> {
+export class LawsuitController extends GenericController<Lawsuit> {
 
 
   constructor(private readonly service: LawsuitService) {
@@ -23,15 +23,4 @@ export class LawsuitController extends GenericController<Lawsuit, Notification> 
     }
   }
 
-  @Delete('/softDelete/:id')
-  async softDelete(@Res() res: Response, @Param('id') id: number) {
-    try {
-      await this.service.softDelete(id,['id_lawsuit']).then(() => {
-        res.sendStatus(HttpStatus.OK);
-      });
-    } catch (e) {
-      console.log(e);
-      res.sendStatus(HttpStatus.BAD_GATEWAY);
-    }
-  }
 }

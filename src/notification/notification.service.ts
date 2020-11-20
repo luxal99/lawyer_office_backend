@@ -10,7 +10,7 @@ import { UserInfoService } from '../user-info/user-info.service';
 
 
 @Injectable()
-export class NotificationService extends GenericService<Notification, Notification> {
+export class NotificationService extends GenericService<Notification> {
 
   @Inject()
   private lawsuitService: LawsuitService;
@@ -19,7 +19,7 @@ export class NotificationService extends GenericService<Notification, Notificati
   private userInfoService: UserInfoService;
 
   constructor(private repository: NotificationRepository) {
-    super(repository, repository, []);
+    super(repository, []);
   }
 
   async deleteAllNotification() {
@@ -89,7 +89,7 @@ export class NotificationService extends GenericService<Notification, Notificati
   }
 
   async scheduledNotification() {
-    new CronJob('10 * * * *', async () => {
+    new CronJob('59 7 * * *', async () => {
       await this.generateNotification();
     }, null, true, 'Europe/Belgrade').start();
   }

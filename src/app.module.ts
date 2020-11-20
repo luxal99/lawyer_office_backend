@@ -13,17 +13,10 @@ import { LawsuitModule } from './lawsuit/lawsuit.module';
 import { NotificationModule } from './notification/notification.module';
 import { Lawsuit } from './lawsuit/lawsuit.entity';
 import { Notification } from './notification/notification.entity';
-import { NotificationService } from './notification/notification.service';
-import { NotificationRepository } from './repository/notification.repository';
-import { LawsuitRepository } from './repository/lawsuit.repository';
-import { LawsuitService } from './lawsuit/lawsuit.service';
-import { UserInfoService } from './user-info/user-info.service';
-import { UserInfoRepository } from './repository/user-info.repository';
-import { UserRepository } from './repository/user.repository';
-import { UserService } from './user/user.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([NotificationRepository,LawsuitRepository,UserInfoRepository,UserRepository]),TypeOrmModule.forRoot({
+  imports: [
+    TypeOrmModule.forRoot({
     'type': 'mysql',
     'host': 'localhost',
     'port': 3306,
@@ -51,8 +44,8 @@ import { UserService } from './user/user.service';
       'migrationsDir': 'src/migration',
       'subscribersDir': 'src/subscriber',
     },
-  }), UserModule,ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule],
-  providers: [AppService, NotificationService,LawsuitService,UserInfoService,UserService],
+  }), UserModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule],
+  providers: [AppService],
 })
 export class AppModule {
 }

@@ -6,10 +6,10 @@ import { Notification } from '../notification/notification.entity';
 import { NotificationRepository } from '../repository/notification.repository';
 
 @Injectable()
-export class LawsuitService extends GenericService<Lawsuit, Notification> {
+export class LawsuitService extends GenericService<Lawsuit> {
 
   constructor(private readonly repository: LawsuitRepository, private readonly notificationRepository: NotificationRepository) {
-    super(repository, notificationRepository, ['id_case', 'id_case.listOfLawsuits', 'id_case.id_client']);
+    super(repository, ['id_case', 'id_case.listOfLawsuits', 'id_case.id_client']);
   }
 
   async getNextThreeLawsuit(): Promise<Lawsuit[]> {

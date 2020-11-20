@@ -3,9 +3,9 @@ import { Body, Delete, Get, HttpStatus, Param, Post, Put, Req, Res } from '@nest
 import { Response, Request } from 'express';
 
 
-export class GenericController<T, G> {
+export class GenericController<T> {
 
-  constructor(private readonly genericService: GenericService<T, G>) {
+  constructor(private readonly genericService: GenericService<T>) {
   }
 
   @Post()

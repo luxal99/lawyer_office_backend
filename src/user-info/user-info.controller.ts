@@ -6,7 +6,7 @@ import { UserService } from '../user/user.service';
 import { User } from '../user/user.entity';
 
 @Controller('userInfo')
-export class UserInfoController extends GenericController<UserInfo, User> {
+export class UserInfoController extends GenericController<UserInfo> {
   constructor(private readonly service: UserInfoService) {
     super(service);
   }

@@ -7,31 +7,17 @@ import { LawsuitService } from '../lawsuit/lawsuit.service';
 import { Lawsuit } from '../lawsuit/lawsuit.entity';
 
 @Controller('case')
-export class CaseController extends GenericController<Case, Lawsuit> {
-
+export class CaseController extends GenericController<Case> {
 
 
   @Inject()
   private httpService: HttpService;
 
-  constructor(private readonly service: CaseService, private readonly lawsuitService: LawsuitService) {
+  @Inject()
+  private lawsuitService: LawsuitService;
+
+  constructor(private readonly service: CaseService) {
     super(service);
-  }
-
-
-  @Delete('case/:id')
-  async deleteCase(@Param('id')id: number, @Res() res: Response) {
-    try {
-      const ids = Array.from(await this.lawsuitService.findAll(), lawsuit => lawsuit).filter(x => x.id_case.id == id);
-      await this.lawsuitService.deleteAll(Array.from(ids, lawsuit => lawsuit.id));
-
-      await this.service.delete(id).then(() => {
-        res.sendStatus(HttpStatus.OK);
-      });
-
-    } catch (e) {
-      res.sendStatus(HttpStatus.BAD_GATEWAY);
-    }
   }
 
   @Get('/lastThree')
@@ -52,16 +38,5 @@ export class CaseController extends GenericController<Case, Lawsuit> {
     }
   }
 
-  @Delete('/softDelete/:id')
-  async softDelete(@Res() res: Response, @Param('id') id: number) {
-    try {
-      await this.httpService.axiosRef.delete(`http://localhost:8080/notification/softDelete/`)
-      await this.service.softDelete(id,['id_case']).then(() => {
-        res.sendStatus(HttpStatus.OK);
-      });
-    } catch (e) {
-      console.log(e);
-      res.sendStatus(HttpStatus.BAD_GATEWAY);
-    }
-  }
+
 }

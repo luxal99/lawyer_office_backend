@@ -7,7 +7,7 @@ import { Lawsuit } from '../lawsuit/lawsuit.entity';
 import { Response } from 'express';
 
 @Controller('notification')
-export class NotificationController extends GenericController<Notification,Notification> {
+export class NotificationController extends GenericController<Notification> {
 
   constructor(private service: NotificationService) {
     super(service);

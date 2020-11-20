@@ -5,7 +5,7 @@ import { Lawsuit } from '../lawsuit/lawsuit.entity';
 @Entity()
 export class Notification extends Base {
 
-  @Column({ length: 10240 })
+  @Column({ length: 10240,charset:'utf8' })
   note: string;
 
   @ManyToOne(type => Lawsuit , id_lawsuit=>id_lawsuit.listOfNotification )

@@ -19,9 +19,11 @@ import { LawsuitRepository } from './repository/lawsuit.repository';
 import { LawsuitService } from './lawsuit/lawsuit.service';
 import { UserInfoService } from './user-info/user-info.service';
 import { UserInfoRepository } from './repository/user-info.repository';
+import { UserRepository } from './repository/user.repository';
+import { UserService } from './user/user.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([NotificationRepository,LawsuitRepository,UserInfoRepository]),TypeOrmModule.forRoot({
+  imports: [TypeOrmModule.forFeature([NotificationRepository,LawsuitRepository,UserInfoRepository,UserRepository]),TypeOrmModule.forRoot({
     'type': 'mysql',
     'host': 'localhost',
     'port': 3306,
@@ -50,7 +52,7 @@ import { UserInfoRepository } from './repository/user-info.repository';
       'subscribersDir': 'src/subscriber',
     },
   }), UserModule,ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule],
-  providers: [AppService, NotificationService,LawsuitService,UserInfoService],
+  providers: [AppService, NotificationService,LawsuitService,UserInfoService,UserService],
 })
 export class AppModule {
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Base } from '../generic/base.entity';
 import { Case } from '../case/case.entity';
 import { Notification } from '../notification/notification.entity';
@@ -15,10 +15,11 @@ export class Lawsuit extends Base {
   @Column({ length: 10240 })
   note: string;
 
-  @ManyToOne(type => Case,id_case=>id_case.listOfLawsuits)
+  @ManyToOne(type => Case,id_case=>id_case.listOfLawsuits,{ cascade: true, onDelete: "CASCADE" })
+  @JoinColumn()
   id_case:Case
 
-  @OneToMany(type => Notification, listOfNotification=>listOfNotification.id_lawsuit)
+  @OneToMany(type => Notification, listOfNotification=>listOfNotification.id_lawsuit,{ cascade: true, onDelete: "CASCADE" })
   listOfNotification:Notification[]
 
   constructor(date?: Date, note?: string) {

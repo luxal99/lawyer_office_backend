@@ -8,4 +8,6 @@ export interface GenericInterface<T> {
   save(entity: T): Promise<T>;
 
   delete(id: number);
+
+  deleteAll(ids:number[])
 }

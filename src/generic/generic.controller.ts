@@ -3,9 +3,9 @@ import { Body, Delete, Get, HttpStatus, Param, Post, Put, Req, Res } from '@nest
 import { Response, Request } from 'express';
 
 
-export class GenericController<T> {
+export class GenericController<T, G> {
 
-  constructor(private readonly genericService: GenericService<T>) {
+  constructor(private readonly genericService: GenericService<T, G>) {
   }
 
   @Post()
@@ -49,4 +49,16 @@ export class GenericController<T> {
       res.sendStatus(HttpStatus.BAD_GATEWAY);
     }
   }
+
+  @Post('/deleteAll')
+  async deleteAll(@Req() req: Request, @Res() res: Response) {
+    try {
+      await this.genericService.delete(req.body.ids).then(() => {
+        res.sendStatus(HttpStatus.OK);
+      });
+    } catch (e) {
+      res.sendStatus(HttpStatus.BAD_GATEWAY);
+    }
+  }
+
 }

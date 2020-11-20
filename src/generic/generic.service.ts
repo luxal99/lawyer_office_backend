@@ -1,12 +1,12 @@
-import {BadGatewayException, Injectable, NotFoundException} from "@nestjs/common";
-import {GenericInterface} from "./generic.interface";
-import {Repository} from "typeorm";
+import { BadGatewayException, Injectable, NotFoundException } from '@nestjs/common';
+import { GenericInterface } from './generic.interface';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class GenericService<T> implements GenericInterface<T> {
+export class GenericService<T, G> implements GenericInterface<T> {
 
   constructor(
-    private readonly genericRepository: Repository<T>, private relations: Array<string>) {
+    private readonly genericRepository: Repository<T>, private secondGenericRepository: Repository<G>, private relations: Array<string>) {
   }
 
   async delete(id: number) {
@@ -14,16 +14,16 @@ export class GenericService<T> implements GenericInterface<T> {
   }
 
   findAll(): Promise<T[]> {
-    return this.genericRepository.find({relations: this.relations});
+    return this.genericRepository.find({ relations: this.relations });
   }
 
   async findOne(id: number): Promise<T> {
-    return await this.genericRepository.findOne(id, {relations: this.relations})
+    return await this.genericRepository.findOne(id, { relations: this.relations });
   }
 
   async save(entity: T): Promise<T> {
     try {
-      return await this.genericRepository.save(entity)
+      return await this.genericRepository.save(entity);
     } catch (error) {
       throw new BadGatewayException(error);
     }
@@ -31,11 +31,24 @@ export class GenericService<T> implements GenericInterface<T> {
 
   async update(id: number, entity: T): Promise<void> {
     const responseAux: Object = await this.genericRepository.findOne(id);
-    if (responseAux == null) throw new NotFoundException("Not exist");
+    if (responseAux == null) throw new NotFoundException('Not exist');
 
-    entity["id"] = Number(id);
+    entity['id'] = Number(id);
     const mergeEntity: any = Object.assign(responseAux, entity);
     const response: T = await this.genericRepository.save(mergeEntity);
   }
 
+
+  async softDelete(id: number, relations: Array<string>) {
+    const ids = Array.from(await this.secondGenericRepository.find({ relations: relations }), secondEntity => secondEntity)
+      .filter(x => x['id_case' || 'id_lawsuit' || 'id_client'].id == id);
+
+    console.log(Array.from(ids, secondEntity => secondEntity['id']));
+      await this.secondGenericRepository.delete(Array.from(ids, secondEntity => secondEntity['id']));
+      await this.delete(id);
+  }
+
+  async deleteAll(ids: number[]) {
+    await this.genericRepository.delete(ids);
+  }
 }

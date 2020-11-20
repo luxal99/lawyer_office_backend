@@ -10,7 +10,7 @@ import { UserInfoService } from '../user-info/user-info.service';
 
 
 @Injectable()
-export class NotificationService extends GenericService<Notification> {
+export class NotificationService extends GenericService<Notification, Notification> {
 
   @Inject()
   private lawsuitService: LawsuitService;
@@ -19,25 +19,33 @@ export class NotificationService extends GenericService<Notification> {
   private userInfoService: UserInfoService;
 
   constructor(private repository: NotificationRepository) {
-    super(repository, []);
+    super(repository, repository, []);
+  }
+
+  async deleteAllNotification() {
+    const ids = await this.repository.find();
+    console.log(Array.from(ids, ids => ids['id']));
   }
 
   protected async generateNotification(): Promise<void> {
-    const listOfLawsuits: Lawsuit[] = await this.lawsuitService.findAll();
+    await this.deleteAllNotification().then(async () => {
 
-    for (const lawsuit of listOfLawsuits) {
-      const diffDays = Math.ceil((lawsuit.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+      const listOfLawsuits: Lawsuit[] = await this.lawsuitService.findAll();
 
-      if (diffDays <= 5 && diffDays > 0) {
-        const text = `Ročište vezano za predmet '${lawsuit.id_case.title}' je za ${diffDays} dana`;
-        await this.repository.save(new Notification(lawsuit, text)).then(async () => {
-          await this.sendMail(text);
-        }).catch((err) => {
-          throw new Error(err);
-        });
+      for (const lawsuit of listOfLawsuits) {
+        const diffDays = Math.ceil((lawsuit.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+
+        if (diffDays <= 5 && diffDays > 0) {
+          const text = `Ročište vezano za predmet '${lawsuit.id_case.title}' je za ${diffDays} dana`;
+          await this.repository.save(new Notification(lawsuit, text)).then(async () => {
+            await this.sendMail(text);
+          }).catch((err) => {
+            throw new Error(err);
+          });
+        }
+
       }
-
-    }
+    });
   }
 
   async findMails(): Promise<string[]> {
@@ -81,7 +89,7 @@ export class NotificationService extends GenericService<Notification> {
   }
 
   async scheduledNotification() {
-    new CronJob('59 7 * * *', async () => {
+    new CronJob('10 * * * *', async () => {
       await this.generateNotification();
     }, null, true, 'Europe/Belgrade').start();
   }

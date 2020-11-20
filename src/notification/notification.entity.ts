@@ -5,10 +5,10 @@ import { Lawsuit } from '../lawsuit/lawsuit.entity';
 @Entity()
 export class Notification extends Base {
 
-  @Column({ length: 10240,charset:'utf8' })
+  @Column({ length: 10240, charset: 'utf8' })
   note: string;
 
-  @ManyToOne(type => Lawsuit , id_lawsuit=>id_lawsuit.listOfNotification )
+  @ManyToOne(type => Lawsuit, id_lawsuit => id_lawsuit.listOfNotification, { nullable: true, onDelete: 'CASCADE' })
   @JoinColumn()
   id_lawsuit: Lawsuit;
 

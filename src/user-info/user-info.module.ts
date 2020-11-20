@@ -5,10 +5,11 @@ import { UserService } from '../user/user.service';
 import { UserController } from '../user/user.controller';
 import { UserInfoController } from './user-info.controller';
 import { UserInfoService } from './user-info.service';
+import { UserRepository } from '../repository/user.repository';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([UserInfoRepository])],
+  imports:[TypeOrmModule.forFeature([UserInfoRepository,UserRepository])],
   controllers:[UserInfoController],
-  providers:[UserInfoService]
+  providers:[UserInfoService,UserService]
 })
 export class UserInfoModule {}

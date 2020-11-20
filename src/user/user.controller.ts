@@ -5,6 +5,7 @@ import { Response } from 'express';
 import { UserService } from './user.service';
 import bcrypt = require('bcrypt');
 import { UserInfo } from '../user-info/user-info.entity';
+import { GenericController } from '../generic/generic.controller';
 
 @Controller('user')
 export class UserController {

@@ -7,10 +7,12 @@ import { NotificationRepository } from '../repository/notification.repository';
 import { LawsuitRepository } from '../repository/lawsuit.repository';
 import { UserInfoRepository } from '../repository/user-info.repository';
 import { UserInfoService } from '../user-info/user-info.service';
+import { UserRepository } from '../repository/user.repository';
+import { UserService } from '../user/user.service';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([NotificationRepository,LawsuitRepository,UserInfoRepository])],
+  imports:[TypeOrmModule.forFeature([NotificationRepository,LawsuitRepository,UserInfoRepository,UserRepository])],
   controllers: [NotificationController],
-  providers: [NotificationService,LawsuitService,UserInfoService]
+  providers: [NotificationService,LawsuitService,UserInfoService,UserService]
 })
 export class NotificationModule {}

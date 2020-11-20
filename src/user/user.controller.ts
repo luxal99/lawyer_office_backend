@@ -31,12 +31,10 @@ export class UserController {
 
       userInfo = response['data'];
 
-      await this.userService.save(new User(req.body.username, await bcrypt.hash(req.body.password, 10), userInfo)).then(() => {
-        resp.sendStatus(HttpStatus.OK);
-      });
+      resp.send(await new User(req.body.username, await bcrypt.hash(req.body.password, 10), userInfo));
 
     } catch (e) {
-      resp.sendStatus(e);
+      resp.sendStatus(HttpStatus.BAD_GATEWAY);
     }
   }
 
@@ -46,7 +44,7 @@ export class UserController {
 
       const user = await this.userService.findByUsername(entity.username);
       const auth = ((user != null && await bcrypt.compare(entity.password, user.password))
-        ? res.send({ token: user.password,username:user.username }) : res.sendStatus(403));
+        ? res.send({ token: user.password, username: user.username }) : res.sendStatus(403));
 
     } catch {
       res.sendStatus(HttpStatus.BAD_GATEWAY);

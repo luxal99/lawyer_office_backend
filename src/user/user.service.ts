@@ -11,7 +11,9 @@ export class UserService {
 
   async save(entity: User) {
     try {
-      await this.manager.save(entity)
+      await this.manager.save(entity).then(()=>{
+        return entity
+      })
     } catch (e) {
       throw new Error('');
     }

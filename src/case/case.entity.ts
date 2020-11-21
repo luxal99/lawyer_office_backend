@@ -7,13 +7,13 @@ import { Lawsuit } from '../lawsuit/lawsuit.entity';
 export class Case extends Base {
 
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   title: string;
 
   @Column({ nullable: false })
   creation_date: Date;
 
-  @Column({default:'01/01/2020'})
+  @Column({ default: '01/01/2020' })
   creation_date_formatted: string;
 
   @Column({ length: 10240, nullable: true })
@@ -22,7 +22,7 @@ export class Case extends Base {
   @Column({ default: true })
   status: boolean;
 
-  @ManyToOne(type => Client, id_client => id_client.listOfCases,{  onDelete: "CASCADE" })
+  @ManyToOne(type => Client, id_client => id_client.listOfCases, { onDelete: 'CASCADE' })
   @JoinColumn()
   id_client: Client;
 

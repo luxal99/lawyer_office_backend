@@ -21,4 +21,13 @@ export class LawsuitController extends GenericController<Lawsuit> {
     }
   }
 
+  @Get('/lawsuitForCurrentMonth')
+  async getLawsuitForCurrentMonth(@Res() res: Response) {
+    try {
+      res.send(await this.service.getLawsuitForCurrentMonth());
+    } catch (e) {
+      res.sendStatus(HttpStatus.BAD_GATEWAY);
+    }
+  }
+
 }

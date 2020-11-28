@@ -26,4 +26,9 @@ export class LawsuitService extends GenericService<Lawsuit> {
       return c - d;
     });
   }
+
+  async getLawsuitFromPeriod(startDate: Date, endDate: Date): Promise<Lawsuit[]> {
+    const listOfLawsuit = await this.findAll();
+    return listOfLawsuit.filter(x => x.date >= new Date(startDate) && x.date <= new Date(endDate));
+  }
 }

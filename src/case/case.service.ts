@@ -16,7 +16,7 @@ export class CaseService extends GenericService<Case> {
   }
 
   async getAnalytics() {
-    return await this.repository.query('select status,COUNT(id) as value from `case` group by status\n');
+    return await this.repository.query('select status,COUNT(id) as value from `case` group by status order by status\n');
   }
 }
 

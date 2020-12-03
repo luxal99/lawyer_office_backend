@@ -31,4 +31,11 @@ export class LawsuitService extends GenericService<Lawsuit> {
     const listOfLawsuit = await this.findAll();
     return listOfLawsuit.filter(x => x.date >= new Date(startDate) && x.date <= new Date(endDate));
   }
+
+  async getLawsuitForDate(forwardedDate: Date): Promise<Lawsuit[]> {
+    const listOfLawsuits: Array<Lawsuit> = await this.findAll();
+
+    return listOfLawsuits.filter(x => (x.date.getDate() === forwardedDate.getDate())
+      && (x.date.getMonth() === forwardedDate.getMonth()) && (x.date.getFullYear() === forwardedDate.getFullYear()));
+  }
 }

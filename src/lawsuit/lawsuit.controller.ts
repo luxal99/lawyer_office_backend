@@ -39,4 +39,14 @@ export class LawsuitController extends GenericController<Lawsuit> {
     }
   }
 
+  @Get('/getByDate')
+  async getByDate(@Req() req: Request, @Res() res: Response) {
+    try {
+
+      res.send(await this.service.getLawsuitForDate(new Date(JSON.stringify(req.query.date))));
+    } catch (e) {
+      res.sendStatus(HttpStatus.BAD_GATEWAY);
+    }
+  }
+
 }

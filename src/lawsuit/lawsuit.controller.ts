@@ -32,8 +32,6 @@ export class LawsuitController extends GenericController<Lawsuit> {
 
   @Post('/period')
   async getLawsuitsFromPeriod(@Req() req: Request, @Res() res: Response) {
-
-    console.log(req.body);
     try {
       res.send(await this.service.getLawsuitFromPeriod(req.body.startDate, req.body.endDate));
     } catch (e) {

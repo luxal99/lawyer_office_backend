@@ -13,6 +13,7 @@ import { LawsuitModule } from './lawsuit/lawsuit.module';
 import { NotificationModule } from './notification/notification.module';
 import { Lawsuit } from './lawsuit/lawsuit.entity';
 import { Notification } from './notification/notification.entity';
+import { NotesModule } from './notes/notes.module';
 
 @Module({
   imports: [
@@ -44,7 +45,7 @@ import { Notification } from './notification/notification.entity';
       'migrationsDir': 'src/migration',
       'subscribersDir': 'src/subscriber',
     },
-  }), UserModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule],
+  }), UserModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule, NotesModule],
   providers: [AppService],
 })
 export class AppModule {

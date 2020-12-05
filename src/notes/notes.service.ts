@@ -2,11 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { GenericService } from '../generic/generic.service';
 import { Notes } from './notes.entity';
 import { NotesRepository } from '../repository/notes.repository';
+import { Lawsuit } from '../lawsuit/lawsuit.entity';
 
 @Injectable()
 export class NotesService extends GenericService<Notes> {
 
-  constructor(genericRepository: NotesRepository) {
-    super(genericRepository, []);
+  constructor(private repository: NotesRepository) {
+    super(repository, []);
   }
-}
+
+  async getNotesForDate(forwardedDate: Date): Promise<Notes[]> {
+    const listOfNotes: Array<Notes> = await this.findAll();
+
+    return listOfNotes.filter(x => (x.date.getDate() === forwardedDate.getDate())
+      && (x.date.getMonth() === forwardedDate.getMonth()) && (x.date.getFullYear() === forwardedDate.getFullYear()));
+  }}

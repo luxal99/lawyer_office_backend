@@ -14,6 +14,7 @@ import { NotificationModule } from './notification/notification.module';
 import { Lawsuit } from './lawsuit/lawsuit.entity';
 import { Notification } from './notification/notification.entity';
 import { NotesModule } from './notes/notes.module';
+import { Notes } from './notes/notes.entity';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { NotesModule } from './notes/notes.module';
       Case,
       Notification,
       Lawsuit,
+      Notes
     ],
     'migrations': [
       'src/migration/**/*.ts',

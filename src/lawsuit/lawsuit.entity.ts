@@ -25,7 +25,6 @@ export class Lawsuit extends Base {
   constructor(date?: Date, note?: string) {
     super();
     this.date = date;
-    this.date.setTime(new Date().getTime())
     this.note = note;
   }
 }

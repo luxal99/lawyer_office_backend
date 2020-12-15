@@ -1,12 +1,12 @@
-import { Controller, Delete, Get, HttpService, HttpStatus, Inject, Param, Res } from '@nestjs/common';
+import { Controller, Get, HttpService, HttpStatus, Inject, Res } from '@nestjs/common';
 import { GenericController } from '../generic/generic.controller';
 import { Case } from './case.entity';
 import { CaseService } from './case.service';
 import { Response } from 'express';
 import { LawsuitService } from '../lawsuit/lawsuit.service';
-import { Lawsuit } from '../lawsuit/lawsuit.entity';
+import { CASE_ROUTE } from '../constants/const';
 
-@Controller('case')
+@Controller(CASE_ROUTE)
 export class CaseController extends GenericController<Case> {
 
 

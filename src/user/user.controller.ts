@@ -5,9 +5,10 @@ import { Response } from 'express';
 import { UserService } from './user.service';
 import bcrypt = require('bcrypt');
 import { UserInfo } from '../user-info/user-info.entity';
-import { GenericController } from '../generic/generic.controller';
+import { TOKEN_SECRET, USER_ROUTE } from '../constants/const';
+import * as jwt from 'jsonwebtoken';
 
-@Controller('user')
+@Controller(USER_ROUTE)
 export class UserController {
 
 
@@ -43,8 +44,15 @@ export class UserController {
     try {
 
       const user = await this.userService.findByUsername(entity.username);
-      const auth = ((user != null && await bcrypt.compare(entity.password, user.password))
-        ? res.send({ token: user.password, username: user.username }) : res.sendStatus(403));
+
+      if (!user) {
+        res.status(HttpStatus.NO_CONTENT).send({ message: 'User not exist' });
+      } else if (await bcrypt.compare(entity.password, user.password)) {
+        const token = jwt.sign({ user: user.username }, TOKEN_SECRET, { expiresIn: 60 * 60 * 3 });
+        res.send({ token: token ,username:user.username});
+      } else {
+        res.sendStatus(HttpStatus.UNAUTHORIZED);
+      }
 
     } catch {
       res.sendStatus(HttpStatus.BAD_GATEWAY);

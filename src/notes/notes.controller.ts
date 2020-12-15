@@ -3,8 +3,9 @@ import { GenericController } from '../generic/generic.controller';
 import { Notes } from './notes.entity';
 import { NotesService } from './notes.service';
 import { Request, Response } from 'express';
+import { NOTES_ROUTE } from '../constants/const';
 
-@Controller('notes')
+@Controller(NOTES_ROUTE)
 export class NotesController extends GenericController<Notes> {
 
   constructor(private service: NotesService) {

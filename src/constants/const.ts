@@ -22,7 +22,7 @@ export class Constant {
 
   static CLIENT_ROUTE = 'client';
 
-  static NOTES_ROUTE = 'note';
+  static NOTES_ROUTE = 'notes';
 
   static USER_ROUTE = 'user';
 

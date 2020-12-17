@@ -9,28 +9,30 @@ import { LawsuitModule } from './lawsuit/lawsuit.module';
 import { NotificationModule } from './notification/notification.module';
 import { NotesModule } from './notes/notes.module';
 import { ConfigModule } from '@nestjs/config';
-import * as constant from './constants/const';
 import { JWTMiddle } from './middleware/verify.middle';
+import { ConstModule } from './constants/const.module';
+import { Constant } from './constants/const';
 
 @Module({
-  imports: [
+  imports: [ConfigModule.forRoot({
+
+    isGlobal: true,
+  }),
     TypeOrmModule.forRoot({
       'type': 'mysql',
       'host': 'localhost',
       'port': 3306,
-      'username': constant.DB_USERNAME,
-      'password': constant.DB_PASSWORD,
-      'database': constant.DB_NAME,
+      'username': process.env.DB_USERNAME,
+      'password': process.env.DB_PASSWORD,
+      'database': process.env.DB_NAME,
       'synchronize': true,
       'logging': false,
-      'entities': constant.LIST_OF_ENTITIES,
-    }), UserModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule, NotesModule, ConfigModule.forRoot({
-      isGlobal: true,
-    })],
+      'entities': Constant.LIST_OF_ENTITIES,
+    }), UserModule, ConstModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule, NotesModule],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(JWTMiddle).forRoutes(constant.CASE_ROUTE, constant.CLIENT_ROUTE, constant.LAWSUIT_ROUTE, constant.NOTES_ROUTE);
+    consumer.apply(JWTMiddle).forRoutes(Constant.CASE_ROUTE, Constant.CLIENT_ROUTE, Constant.LAWSUIT_ROUTE, Constant.NOTES_ROUTE);
   }
 }

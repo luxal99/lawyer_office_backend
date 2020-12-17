@@ -1,10 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Constant } from './constants/const';
 const axios = require('axios');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(8080);
+  await app.listen(process.env.PORT);
+
 }
 
 bootstrap().then(async () => {

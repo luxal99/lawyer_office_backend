@@ -2,11 +2,10 @@ import { Controller, Get, HttpStatus, Inject, Res } from '@nestjs/common';
 import { GenericController } from '../generic/generic.controller';
 import { Notification } from './notification.entity';
 import { NotificationService } from './notification.service';
-import { LawsuitService } from '../lawsuit/lawsuit.service';
-import { Lawsuit } from '../lawsuit/lawsuit.entity';
 import { Response } from 'express';
+import { Constant } from '../constants/const';
 
-@Controller('notification')
+@Controller(Constant.NOTIFICATION_ROUTE)
 export class NotificationController extends GenericController<Notification> {
 
   constructor(private service: NotificationService) {

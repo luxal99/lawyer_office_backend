@@ -3,9 +3,9 @@ import { GenericController } from '../generic/generic.controller';
 import { Lawsuit } from './lawsuit.entity';
 import { LawsuitService } from './lawsuit.service';
 import { Request, Response } from 'express';
-import { LAWSUIT_ROUTE } from '../constants/const';
+import { Constant } from '../constants/const';
 
-@Controller(LAWSUIT_ROUTE)
+@Controller(Constant.LAWSUIT_ROUTE)
 export class LawsuitController extends GenericController<Lawsuit> {
 
 

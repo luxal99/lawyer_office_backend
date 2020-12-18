@@ -17,24 +17,14 @@ export class Constant {
     Notes,
   ];
   static LAWSUIT_ROUTE = 'lawsuit';
-
   static CASE_ROUTE = 'case';
-
   static CLIENT_ROUTE = 'client';
-
   static NOTES_ROUTE = 'notes';
-
   static USER_ROUTE = 'user';
-
-
   static NOTIFICATION_ROUTE = 'notification';
-
   static TOKEN_HEADER_NAME = 'auth-token';
-
   static AC_DENIED_MESSAGE = 'Access Denied';
-
   static INVALID_TOKEN_MESSAGE = 'Invalid token';
-
 
 
 }

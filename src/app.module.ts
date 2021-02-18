@@ -15,7 +15,6 @@ import { Constant } from './constants/const';
 
 @Module({
   imports: [ConfigModule.forRoot({
-
     isGlobal: true,
   }),
     TypeOrmModule.forRoot({

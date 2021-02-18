@@ -15,7 +15,7 @@ export class Client extends Base {
   @Column({ nullable: false })
   telephone: string;
 
-  @OneToMany(type => Case, listOfCases => listOfCases.id_client,)
+  @OneToMany(type => Case, listOfCases => listOfCases.id_client)
   listOfCases: Case[];
 
   constructor(full_name?: string, email?: string, telephone?: string) {

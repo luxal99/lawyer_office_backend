@@ -20,11 +20,6 @@ export class CaseController extends GenericController<Case> {
     super(service);
   }
 
-  // @Get()
-  // async get(@Res() res: Response, @Req() req: Request) {
-  //   res.send(await this.service.findAll())
-  // }
-
   @Get('/lastThree')
   async getLastThreeCases(@Res() res: Response) {
     try {

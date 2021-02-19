@@ -33,5 +33,6 @@ import { Constant } from './constants/const';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
     consumer.apply(JWTMiddle).forRoutes(Constant.CASE_ROUTE, Constant.CLIENT_ROUTE, Constant.LAWSUIT_ROUTE, Constant.NOTES_ROUTE);
+    consumer.apply(JWTMiddle).forRoutes({ method: RequestMethod.PUT, path: Constant.USER_ROUTE });
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpService, HttpStatus, Inject, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, HttpService, HttpStatus, Inject, Post, Put, Req, Res } from '@nestjs/common';
 import { User } from './user.entity';
 import { Request } from 'express';
 import { Response } from 'express';
@@ -48,7 +48,7 @@ export class UserController {
         res.status(HttpStatus.UNAUTHORIZED).send({ message: 'User not exist' });
       } else if (await bcrypt.compare(entity.password, user.password)) {
         const token = jwt.sign({ user: user.username }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 * 24 });
-        res.send({ token: token ,username:user.username});
+        res.send({ token: token, username: user.username });
       } else {
         res.sendStatus(HttpStatus.UNAUTHORIZED);
       }
@@ -57,6 +57,23 @@ export class UserController {
       res.sendStatus(HttpStatus.BAD_GATEWAY);
     }
 
+  }
+
+  @Put('')
+  async update(@Req() req: Request, @Res() res: Response) {
+    try {
+      const user: User = await this.userService.findByUsername(req.body.oldUsername);
+
+      user.username = req.body.newUsername;
+      user.password = await bcrypt.hash(req.body.password, 10);
+
+      this.userService.update(user).then(() => {
+        res.send({ user });
+      });
+
+    } catch (e) {
+      res.status(HttpStatus.BAD_GATEWAY).send({ e });
+    }
   }
 
 }

@@ -44,11 +44,10 @@ export class UserController {
     try {
 
       const user = await this.userService.findByUsername(entity.username);
-
       if (!user) {
-        res.status(HttpStatus.NO_CONTENT).send({ message: 'User not exist' });
+        res.status(HttpStatus.UNAUTHORIZED).send({ message: 'User not exist' });
       } else if (await bcrypt.compare(entity.password, user.password)) {
-        const token = jwt.sign({ user: user.username }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 * 3 });
+        const token = jwt.sign({ user: user.username }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 * 24 });
         res.send({ token: token ,username:user.username});
       } else {
         res.sendStatus(HttpStatus.UNAUTHORIZED);

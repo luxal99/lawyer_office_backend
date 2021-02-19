@@ -7,7 +7,7 @@ import { Lawsuit } from '../lawsuit/lawsuit.entity';
 export class Case extends Base {
 
 
-  @Column({ nullable: false, unique: true })
+  @Column({ nullable: false })
   title: string;
 
   @Column({ nullable: false })

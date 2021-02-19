@@ -1,8 +1,8 @@
-import { Controller, Get, HttpService, HttpStatus, Inject, Res } from '@nestjs/common';
+import { Controller, Get, HttpService, HttpStatus, Inject, Req, Res } from '@nestjs/common';
 import { GenericController } from '../generic/generic.controller';
 import { Case } from './case.entity';
 import { CaseService } from './case.service';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { LawsuitService } from '../lawsuit/lawsuit.service';
 import { Constant } from '../constants/const';
 
@@ -19,6 +19,11 @@ export class CaseController extends GenericController<Case> {
   constructor(private readonly service: CaseService) {
     super(service);
   }
+
+  // @Get()
+  // async get(@Res() res: Response, @Req() req: Request) {
+  //   res.send(await this.service.findAll())
+  // }
 
   @Get('/lastThree')
   async getLastThreeCases(@Res() res: Response) {

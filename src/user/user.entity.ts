@@ -7,7 +7,7 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({unique:true})
+  @Column({ unique: true })
   username: string;
 
   @Column()
@@ -15,12 +15,12 @@ export class User extends BaseEntity {
 
   @OneToOne(type => UserInfo)
   @JoinColumn()
-  id_user_info: UserInfo;
+  idUserInfo: UserInfo;
 
-  constructor(username?: string, password?: string,userInfo?:UserInfo) {
+  constructor(username?: string, password?: string, userInfo?: UserInfo) {
     super();
     this.username = username;
     this.password = password;
-    this.id_user_info = userInfo
+    this.idUserInfo = userInfo;
   }
 }

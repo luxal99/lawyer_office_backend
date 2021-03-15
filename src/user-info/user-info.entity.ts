@@ -1,18 +1,19 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import { Base } from '../generic/base.entity';
 
 @Entity()
 export class UserInfo extends Base {
+
   @Column({ nullable: false })
-  full_name: string;
+  fullName: string;
 
   @Column({ nullable: false })
   email: string;
 
 
-  constructor(full_name?: string, email?: string) {
+  constructor(fullName?: string, email?: string) {
     super();
-    this.full_name = full_name;
+    this.fullName = fullName;
     this.email = email;
   }
 }

@@ -11,10 +11,10 @@ export class Case extends Base {
   title: string;
 
   @Column({ nullable: false })
-  creation_date: Date;
+  creationDate: Date;
 
   @Column({ default: '01/01/2020' })
-  creation_date_formatted: string;
+  creationDateFormatted: string;
 
   @Column({ length: 10240, nullable: true })
   note: string;
@@ -22,18 +22,18 @@ export class Case extends Base {
   @Column({ default: true })
   status: boolean;
 
-  @ManyToOne(type => Client, id_client => id_client.listOfCases, { onDelete: 'CASCADE' })
+  @ManyToOne(type => Client, idClient => idClient.listOfCases, { onDelete: 'CASCADE' })
   @JoinColumn()
-  id_client: Client;
+  idClient: Client;
 
   @OneToMany(type => Lawsuit, listOfLawsuits => listOfLawsuits.id_case)
   listOfLawsuits: Lawsuit[];
 
   constructor(creation_date: Date, note: string, id_client: Client) {
     super();
-    this.creation_date = creation_date;
+    this.creationDate = creation_date;
     this.note = note;
-    this.id_client = id_client;
+    this.idClient = id_client;
 
 
   }

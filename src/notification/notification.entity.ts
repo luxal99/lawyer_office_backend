@@ -10,12 +10,12 @@ export class Notification extends Base {
 
   @ManyToOne(type => Lawsuit, id_lawsuit => id_lawsuit.listOfNotification, { nullable: true, onDelete: 'CASCADE' })
   @JoinColumn()
-  id_lawsuit: Lawsuit;
+  idLawsuit: Lawsuit;
 
 
-  constructor(id_lawsuit?: Lawsuit, note?: string) {
+  constructor(idLawsuit?: Lawsuit, note?: string) {
     super();
     this.note = note;
-    this.id_lawsuit = id_lawsuit;
+    this.idLawsuit = idLawsuit;
   }
 }

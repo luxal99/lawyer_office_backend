@@ -10,16 +10,16 @@ export class Lawsuit extends Base {
   date: Date;
 
   @Column({default:'01/01/2020'})
-  date_formatted: string;
+  dateFormatted: string;
 
   @Column({ length: 10240 })
   note: string;
 
-  @ManyToOne(type => Case,id_case=>id_case.listOfLawsuits,{ cascade: true, onDelete: "CASCADE" })
+  @ManyToOne(type => Case,idCase=>idCase.listOfLawsuits,{ cascade: true, onDelete: "CASCADE" })
   @JoinColumn()
-  id_case:Case
+  idCase:Case
 
-  @OneToMany(type => Notification, listOfNotification=>listOfNotification.id_lawsuit,{ cascade: true, onDelete: "CASCADE" })
+  @OneToMany(type => Notification, listOfNotification=>listOfNotification.idLawsuit,{ cascade: true, onDelete: "CASCADE" })
   listOfNotification:Notification[]
 
   constructor(date?: Date, note?: string) {

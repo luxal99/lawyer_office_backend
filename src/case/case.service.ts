@@ -8,7 +8,7 @@ export class CaseService extends GenericService<Case> {
 
 
   constructor(private readonly repository: CaseRepository) {
-    super(repository, ['id_client', 'listOfLawsuits', 'listOfLawsuits.id_case', 'id_client.listOfCases']);
+    super(repository, ['idClient', 'listOfLawsuits', 'listOfLawsuits.idCase', 'idClient.listOfCases']);
   }
 
   async getLastThreeCases(): Promise<Case[]> {

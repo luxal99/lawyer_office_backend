@@ -36,7 +36,7 @@ export class NotificationService extends GenericService<Notification> {
         const diffDays = Math.ceil((lawsuit.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
 
         if (diffDays <= 5 && diffDays > 0) {
-          const text = `Ročište vezano za predmet '${lawsuit.id_case.title}' je za ${diffDays} dana`;
+          const text = `Ročište vezano za predmet '${lawsuit.idCase.title}' je za ${diffDays} dana`;
           await this.repository.save(new Notification(lawsuit, text)).then(async () => {
             await this.sendMail(text);
           }).catch((err) => {

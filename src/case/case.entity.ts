@@ -26,7 +26,7 @@ export class Case extends Base {
   @JoinColumn()
   idClient: Client;
 
-  @OneToMany(type => Lawsuit, listOfLawsuits => listOfLawsuits.id_case)
+  @OneToMany(type => Lawsuit, listOfLawsuits => listOfLawsuits.idCase)
   listOfLawsuits: Lawsuit[];
 
   constructor(creation_date: Date, note: string, id_client: Client) {

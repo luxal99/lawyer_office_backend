@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { GenericService } from '../generic/generic.service';
 import { Notes } from './notes.entity';
 import { NotesRepository } from '../repository/notes.repository';
-import { Lawsuit } from '../lawsuit/lawsuit.entity';
 
 @Injectable()
 export class NotesService extends GenericService<Notes> {

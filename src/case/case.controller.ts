@@ -9,7 +9,7 @@ import { Constant } from '../constants/const';
 @Controller(Constant.CASE_ROUTE)
 export class CaseController extends GenericController<Case> {
 
-
+  tag = 'case';
   @Inject()
   private httpService: HttpService;
 

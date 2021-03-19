@@ -15,8 +15,11 @@ import { UserService } from '../user/user.service';
 import { UserInfoService } from '../user-info/user-info.service';
 
 @Module({
-  imports:[HttpModule,TypeOrmModule.forFeature([ClientRepository,CaseRepository,LawsuitRepository,NotificationRepository,UserRepository,UserInfoRepository])],
+  imports: [HttpModule, TypeOrmModule.forFeature([
+    ClientRepository, CaseRepository, LawsuitRepository,
+    NotificationRepository, UserRepository, UserInfoRepository])],
   controllers: [CaseController],
-  providers: [ClientService,CaseService,LawsuitService,NotificationService,UserService,UserInfoService]
+  providers: [ClientService, CaseService, LawsuitService, NotificationService, UserService, UserInfoService],
 })
-export class CaseModule {}
+export class CaseModule {
+}

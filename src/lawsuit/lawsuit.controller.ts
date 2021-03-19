@@ -7,11 +7,12 @@ import { Constant } from '../constants/const';
 
 @Controller(Constant.LAWSUIT_ROUTE)
 export class LawsuitController extends GenericController<Lawsuit> {
-
+  tag = 'lawsuit';
 
   constructor(private readonly service: LawsuitService) {
     super(service);
   }
+
 
   @Get('nextThreeLawsuit')
   async getNextThreeLawsuit(@Res() res: Response) {

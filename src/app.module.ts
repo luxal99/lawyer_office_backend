@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { JWTMiddle } from './middleware/verify.middle';
 import { ConstModule } from './constants/const.module';
 import { Constant } from './constants/const';
+import { DocumentModule } from './document/document.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -27,7 +28,7 @@ import { Constant } from './constants/const';
       'synchronize': true,
       'logging': false,
       'entities': Constant.LIST_OF_ENTITIES,
-    }), UserModule, ConstModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule, NotesModule],
+    }), UserModule, ConstModule, ClientModule, CaseModule, UserInfoModule, LawsuitModule, NotificationModule, NotesModule, DocumentModule],
   providers: [AppService],
 })
 export class AppModule implements NestModule {

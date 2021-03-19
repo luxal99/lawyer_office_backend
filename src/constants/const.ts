@@ -5,6 +5,7 @@ import { Case } from '../case/case.entity';
 import { Notification } from '../notification/notification.entity';
 import { Lawsuit } from '../lawsuit/lawsuit.entity';
 import { Notes } from '../notes/notes.entity';
+import { Document } from '../document/document.entity';
 
 export class Constant {
   static LIST_OF_ENTITIES = [
@@ -12,6 +13,7 @@ export class Constant {
     UserInfo,
     Client,
     Case,
+    Document,
     Notification,
     Lawsuit,
     Notes,

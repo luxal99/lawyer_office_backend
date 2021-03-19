@@ -1,8 +1,6 @@
 import { GenericService } from './generic.service';
 import { Body, Delete, Get, HttpStatus, Param, Post, Put, Req, Res } from '@nestjs/common';
 import { Response, Request } from 'express';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
-
 
 export class GenericController<T> {
 
@@ -10,7 +8,6 @@ export class GenericController<T> {
   }
 
   @Post()
-  @ApiTags('POST')
   async post(@Body() entity: T, @Res() res: Response) {
     const entityResponse = await this.genericService.save(entity);
     res.send(entityResponse);
